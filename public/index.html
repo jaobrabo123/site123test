@@ -3,34 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Super Mini-Games</title>
 </head>
 <body>
-    <h1>Cadastro de Usuários</h1>
-    <input type="text" id="nome" placeholder="Nome"><br>
-    <input type="email" id="email" placeholder="Email"><br>
-    <input type="text" id="genero" placeholder="Gênero"><br>
-    <input type="password" id="senha" placeholder="Senha"><br>
-    <input type="date" id="nasc"><br>
-    <button onclick="enviarUsuario()">Enviar</button>
-
-    <script>
-    function enviarUsuario() {
-        const nome = document.querySelector('#nome').value
-        const email = document.querySelector('#email').value
-        const genero = document.querySelector('#genero').value
-        const senha = document.querySelector('#senha').value
-        const nasc = document.querySelector('#nasc').value
-
-        fetch('/usuarios', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome, email, senha, genero, nasc })
-        })
-        .then(res => res.text())
-        .then(msg => alert(msg))
-        .catch(err => alert('Erro: ' + err))
-    }
-    </script>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="https://site-teste-6op7.onrender.com/login.html"></a>Login/Cadastro</li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Texto teste</h1>
 </body>
 </html>
