@@ -10,10 +10,57 @@
         <nav>
             <ul>
                 <li><a href="#home">Início</a></li>
-                <li><a href="https://site-teste-6op7.onrender.com/login.html">Login/Cadastro</a></li>
+                <li id="loginMenuItem"><a href="https://site-teste-6op7.onrender.com/login.html">Login/Cadastro</a></li>
+                <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
             </ul>
         </nav>
     </header>
-    <h1>Texto teste</h1>
+    <div id="main">
+        <h1>Super Mini-Games</h1>
+        <p id="welcomeMessage"></p>
+    </div>
+
+    <script>
+    // Verificar se o usuário está logado
+    document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem('token');
+        
+        if (token) {
+            // Se estiver logado, exibir mensagem de boas-vindas
+            fetch('/usuarios', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Usuário não autenticado');
+                }
+            })
+            .then(data => {
+                document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
+                document.querySelector('#loginMenuItem').style.display = 'none';
+                document.querySelector('#logoutMenuItem').style.display = 'block';
+            })
+            .catch(() => {
+                alert('Sua sessão expirou. Faça login novamente.');
+                localStorage.removeItem('token');
+                window.location.href = '/login.html';
+            });
+        } else {
+            // Se não estiver logado, redirecionar para a página de login
+            window.location.href = '/login.html';
+        }
+    });
+
+    // Função para logout
+    function logout() {
+        localStorage.removeItem('token');
+        alert('Você foi desconectado.');
+        window.location.href = '/login.html';
+    }
+    </script>
 </body>
 </html>
