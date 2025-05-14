@@ -40,6 +40,7 @@
                 }
             })
             .then(data => {
+                console.log(data);
                 document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
                 document.querySelector('#loginMenuItem').style.display = 'none';
                 document.querySelector('#logoutMenuItem').style.display = 'block';
