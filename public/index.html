@@ -4,13 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Mini-Games</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1em 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        #main {
+            padding: 2em;
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        #welcomeMessage {
+            margin-top: 1em;
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="#home">Início</a></li>
-                <li id="loginMenuItem"><a href="https://site-teste-6op7.onrender.com/login.html">Login/Cadastro</a></li>
+                <li id="loginMenuItem"><a href="/login.html">Login/Cadastro</a></li>
                 <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
             </ul>
         </nav>
@@ -21,47 +61,47 @@
     </div>
 
     <script>
-    // Verificar se o usuário está logado
-    document.addEventListener('DOMContentLoaded', () => {
-        const token = localStorage.getItem('token');
-        
-        if (token) {
-            // Se estiver logado, exibir mensagem de boas-vindas
-            fetch('/usuarios', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Usuário não autenticado');
-                }
-            })
-            .then(data => {
-                console.log(data);
-                document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
-                document.querySelector('#loginMenuItem').style.display = 'none';
-                document.querySelector('#logoutMenuItem').style.display = 'block';
-            })
-            .catch(() => {
-                alert('Sua sessão expirou. Faça login novamente.');
-                localStorage.removeItem('token');
+        // Verificar se o usuário está logado
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            
+            if (token) {
+                // Se estiver logado, exibir mensagem de boas-vindas
+                fetch('/usuarios', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json(); // Backend retorna um único usuário
+                    } else {
+                        throw new Error('Usuário não autenticado');
+                    }
+                })
+                .then(data => {
+                    console.log(data); // Verifique o retorno para confirmar
+                    document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
+                    document.querySelector('#loginMenuItem').style.display = 'none';
+                    document.querySelector('#logoutMenuItem').style.display = 'block';
+                })
+                .catch(() => {
+                    alert('Sua sessão expirou. Faça login novamente.');
+                    localStorage.removeItem('token');
+                    window.location.href = '/login.html';
+                });
+            } else {
+                // Se não estiver logado, redirecionar para página de login
                 window.location.href = '/login.html';
-            });
-        } else {
-            // Se não estiver logado, redirecionar para página de login
+            }
+        });
+
+        // Função para logout
+        function logout() {
+            localStorage.removeItem('token');
+            alert('Você foi desconectado.');
             window.location.href = '/login.html';
         }
-    });
-
-    // Função para logout
-    function logout() {
-        localStorage.removeItem('token');
-        alert('Você foi desconectado.');
-        window.location.href = '/login.html';
-    }
     </script>
 </body>
 </html>
