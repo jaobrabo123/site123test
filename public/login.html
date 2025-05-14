@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login ou Cadastro</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Login</title>
 </head>
 <body>
+    <header>
+    <nav>
+        <ul>
+            <li><a href="./index.html">Início</a></li>
+            <li><a href="./minigames.html">Mini-Games</a></li>
+            <li id="loginMenuItem"><a href="#home">Login/Cadastro</a></li>
+        </ul>
+    </nav>
+    </header>
     <h1>Login</h1>
     <input type="email" id="loginEmail" placeholder="Email"><br>
     <input type="password" id="loginSenha" placeholder="Senha"><br>
@@ -44,21 +54,43 @@
     }
 
     function enviarUsuario() {
-        const nome = document.querySelector('#nome').value;
-        const email = document.querySelector('#email').value;
-        const genero = document.querySelector('#genero').value;
-        const senha = document.querySelector('#senha').value;
-        const nasc = document.querySelector('#nasc').value;
+    const nome = document.querySelector('#nome').value;
+    const email = document.querySelector('#email').value;
+    const genero = document.querySelector('#genero').value;
+    const senha = document.querySelector('#senha').value;
+    const nasc = document.querySelector('#nasc').value;
 
-        fetch('/usuarios', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nome, email, senha, genero, nasc })
-        })
-        .then(res => res.text())
-        .then(msg => alert(msg))
-        .catch(err => alert('Erro: ' + err.message));
-    }
+    fetch('/usuarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, senha, genero, nasc })
+    })
+    .then(res => {
+        if (res.ok) {
+            // Cadastro bem-sucedido, agora faz login automático
+            return fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, senha })
+            });
+        } else {
+            throw new Error('Erro ao cadastrar o usuário.');
+        }
+    })
+    .then(res => {
+        if (res.ok) {
+            return res.json();
+        } else {
+            throw new Error('Login automático falhou.');
+        }
+    })
+    .then(data => {
+        localStorage.setItem('token', data.token);
+        window.location.href = '/index.html'; // Redireciona após login
+    })
+    .catch(err => alert('Erro: ' + err.message));
+}
+
     </script>
 </body>
 </html>

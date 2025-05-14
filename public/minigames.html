@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js" defer></script>
-    <title>Super Mini-Games</title>
-    
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Minigames</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="./minigames.html">Mini-Games</a></li>
+                <li><a href="./index.html">Início</a></li>
+                <li><a href="#home">Mini-Games</a></li>
                 <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
                 <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
             </ul>
@@ -26,9 +25,7 @@
         </section>
 
     </div>
-
     <script>
-        // Verificar se o usuário está logado
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
             
@@ -64,9 +61,6 @@
                 document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar um conta!`;
             }
         });
-
-        // Função para logout
-        
     </script>
 </body>
 </html>
