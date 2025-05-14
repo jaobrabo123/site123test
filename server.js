@@ -82,3 +82,24 @@ app.get('/usuarios', authenticateToken, async (req, res) => {
 
 // Inicia o servidor
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));
+
+// Rota para buscar todos os usuários
+app.get('/todos-usuarios', authenticateToken, async (req, res) => {
+    try {
+        const db = await open({
+            filename: './database.db',
+            driver: sqlite3.Database,
+        });
+
+        // Busca todos os usuários
+        const usuarios = await db.all('SELECT id, nome, email, genero, nasc FROM usuarios');
+
+        if (usuarios.length === 0) {
+            return res.status(404).json({ error: 'Nenhum usuário encontrado' });
+        }
+
+        res.json(usuarios);
+    } catch (error) {
+        res.status(500).send('Erro ao buscar usuários: ' + error.message);
+    }
+});

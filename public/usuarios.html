@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Todos os Usuários</title>
+  <script src="js/script.js" defer></script> <!-- Certifique-se de que o script seja carregado -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Início</a></li>
+        <li><a href="./minigames.html">Mini-Games</a></li>
+        <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
+        <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1>Todos os Usuários</h1>
+  <div id="dadosUsuarios"></div>
+  <div id="welcomeMessage"></div> <!-- Esta mensagem é para o estado de logout -->
+
+  <script>
+    // Função para verificar se o usuário está logado e atualizar o menu
+    function verificarLoginStatus() {
+      const token = localStorage.getItem('token');
+      
+      if (token) {
+        // Se o token existir, significa que o usuário está logado
+        document.querySelector('#loginMenuItem').style.display = 'none'; // Esconde o link de Login/Cadastro
+        document.querySelector('#logoutMenuItem').style.display = 'block'; // Exibe o link de Logout
+      } else {
+        // Se não existir o token, significa que o usuário está desconectado
+        document.querySelector('#loginMenuItem').style.display = 'block'; // Exibe o link de Login/Cadastro
+        document.querySelector('#logoutMenuItem').style.display = 'none'; // Esconde o link de Logout
+        document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar uma conta!`;
+      }
+    }
+
+    // Carrega todos os usuários (depois que o login é verificado)
+    async function carregarTodosUsuarios() {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        return;
+      }
+
+      try {
+        const res = await fetch('/todos-usuarios', {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        });
+
+        if (!res.ok) {
+          throw new Error('Acesso negado ou token inválido.');
+        }
+
+        const usuarios = await res.json();
+
+        if (usuarios.length === 0) {
+          document.getElementById('dadosUsuarios').innerText = 'Nenhum usuário encontrado.';
+          return;
+        }
+
+        let htmlContent = '<table><tr><th>ID</th><th>Nome</th><th>Email</th><th>Gênero</th><th>Data de Nascimento</th></tr>';
+
+        usuarios.forEach(usuario => {
+          htmlContent += `
+            <tr>
+              <td>${usuario.id}</td>
+              <td>${usuario.nome}</td>
+              <td>${usuario.email}</td>
+              <td>${usuario.genero}</td>
+              <td>${usuario.nasc}</td>
+            </tr>
+          `;
+        });
+
+        htmlContent += '</table>';
+        document.getElementById('dadosUsuarios').innerHTML = htmlContent;
+
+      } catch (err) {
+        document.getElementById('dadosUsuarios').innerText = 'Erro: ' + err.message;
+      }
+    }
+
+    // Chama a função para verificar o estado de login e carregar os usuários
+    verificarLoginStatus();
+    carregarTodosUsuarios();
+  </script>
+</body>
+</html>
