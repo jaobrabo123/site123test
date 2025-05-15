@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <script src="js/login.js" defer></script>
     <script src="js/script.js" defer></script>
+    
     <title>Login</title>
 </head>
 <body>
@@ -18,19 +22,49 @@
         </ul>
     </nav>
     </header>
-    <h1>Login</h1>
-    <input type="email" id="loginEmail" placeholder="Email"><br>
-    <input type="password" id="loginSenha" placeholder="Senha"><br>
-    <button onclick="logar()">Entrar</button>
+    <main class="login-container" id="arer">
+    <div id="cadastroForm" class="form-box">
+        <h1>Cadastro de Usuários</h1>
+        <input type="text" id="nome" placeholder="Nome"><br>
+        <input type="email" id="email" placeholder="Email"><br>
+        <label for="genero">Gênero:</label>
+        <select id="genero" name="genero" required>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="O">Outro</option>
+        </select>
+        <br>
+        <input type="password" id="senha" placeholder="Senha"><br>
+        <img src="imgs/eye-closed.png" alt="Ocultar / Revelar senha" id="olhinho" onclick="ocultar()">
+        <input type="date" id="nasc"><br>
+        <button onclick="enviarUsuario()" id="botaocadastrar">Cadastrar</button>
+        <p class="switch-link"><a href="#" onclick="mostrarLogin()">Já tem uma conta?</a></p>
+    </div>
 
-    <h1>Cadastro de Usuários</h1>
-    <input type="text" id="nome" placeholder="Nome"><br>
-    <input type="email" id="email" placeholder="Email"><br>
-    <input type="text" id="genero" placeholder="Gênero"><br>
-    <input type="password" id="senha" placeholder="Senha"><br>
-    <input type="date" id="nasc"><br>
-    <button onclick="enviarUsuario()">Cadastrar</button>
+    <div id="loginForm" class="form-box" style="display: none;">
+        <h1>Login</h1>
+        <input type="email" id="loginEmail" placeholder="Email"><br>
+        <input type="password" id="loginSenha" placeholder="Senha"><br>
+        <img src="imgs/eye-closed.png" alt="Ocultar / Revelar senha" id="olhinho2" onclick="ocultar2()">
+        <button onclick="logar()">Entrar</button>
+        <p class="switch-link"><a href="#" onclick="mostrarCadastro()">Voltar ao cadastro</a></p>
+    </div>
+    </main>
+    <footer>
+    <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>
 
+
+    <p>
+        <i class="fa-brands fa-instagram"></i> joaofreire29 <i class="fa-solid fa-envelope"></i> jp2904.lindo@gmail.com <i class="fa-brands fa-whatsapp"></i> 79 9 9146-0078
+    </p>
+
+    <p>
+        Criado por João Pedro Azevedo Freire Mecenas<br>
+        Desenvolvido com HTML, CSS, JavaScript, Node.js e SQLite
+    </p>
+
+    <p><a href="#arer">Voltar ao topo ↑</a></p>
+    </footer>
     <script>
     function logar() {
         const email = document.querySelector('#loginEmail').value;
@@ -61,6 +95,10 @@
     const genero = document.querySelector('#genero').value;
     const senha = document.querySelector('#senha').value;
     const nasc = document.querySelector('#nasc').value;
+    if (nome=='' || email=='' || genero=='' || senha=='' || nasc==''){
+        alert('Preencha todos os campos!')
+        return;
+    }
 
     fetch('/usuarios', {
         method: 'POST',

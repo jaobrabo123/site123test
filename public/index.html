@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--https://fontawesome.com/search?q=email&o=r-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
     <script src="js/script.js" defer></script>
     <script src="js/index.js" defer></script>
     <title>Super Mini-Games</title>
@@ -13,7 +16,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href="#home">Início</a></li>
+                <li><a href="#home">Início</a></li> 
                 <li><a href="./minigames.html">Mini-Games</a></li>
                 <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
                 <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
@@ -27,32 +30,43 @@
             <p></p>
         </section>
         <section id="content">
-            <div class="slides">
+            <div class="slideshow">
                 <div class="slide">
-                    <img src="imgs/xadrez.jpg" alt="Xadrez">
+                    <img src="imgs/xadrez-novo.jpg" alt="Xadrez">
                 </div>
                 <div class="slide">
-                    <img src="imgs/damas.jpg" alt="Damas">
+                    <img src="imgs/damas-novo.jpg" alt="Damas">
                 </div>
                 <div class="slide">
-                    <img src="imgs/sudoku.jpg" alt="Sudoku">
+                    <img src="imgs/sudoku-novo.jpg" alt="Sudoku">
                 </div>
                 <div class="slide">
-                    <img src="imgs/jogodavelha.jpg" alt="Jogo da velha">
+                    <img src="imgs/jogodavelha-novo.jpg" alt="Jogo da velha">
                 </div>
                 <div class="slide">
-                    <img src="imgs/campominado.png" alt="Campo Minado">
+                    <img src="imgs/campominado-novo.png" alt="Campo Minado">
                 </div>
-                <img src="imgs/arrow-big-left-line.png" alt="Seta Esquerda">
-                <img src="imgs/arrow-big-right-line.png" alt="Seta Direita">
             </div>
-            <p>Jogue diversos mini-games em nosso site! Temos Xadrez, Damas, Sudoku, Jogo da velha e Campo Minado! Clique <a href="./minigames.html">aqui</a> para ver nossos mini-games!</p>
-            <p>Veja também o nosso Rank dos melhores jogadores de cada mini-game clicando <a href="./rank.html">aqui</a>!</p>
+            <p>Jogue diversos mini-games em nosso site! Temos <strong>Xadrez, Damas, Sudoku, Jogo da velha e Campo Minado</strong>! Clique <a href="./minigames.html">aqui</a> para ver nossos mini-games!</p>
+            <p>Veja também o nosso <strong>Rank</strong> dos melhores jogadores de cada mini-game clicando <a href="./rank.html">aqui</a>!</p>
         </section>
     </div>
     <footer>
+    <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>
 
+
+    <p>
+        <i class="fa-brands fa-instagram"></i> joaofreire29 <i class="fa-solid fa-envelope"></i> jp2904.lindo@gmail.com <i class="fa-brands fa-whatsapp"></i> 79 9 9146-0078
+    </p>
+
+    <p>
+        Criado por João Pedro Azevedo Freire Mecenas<br>
+        Desenvolvido com HTML, CSS, JavaScript, Node.js e SQLite
+    </p>
+
+    <p><a href="#home">Voltar ao topo ↑</a></p>
     </footer>
+
     <script>
         // Verificar se o usuário está logado
         document.addEventListener('DOMContentLoaded', () => {

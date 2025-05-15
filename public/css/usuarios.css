@@ -1,0 +1,81 @@
+/* Espaço para o conteúdo abaixo do header fixo */
+body {
+  padding-top: 80px;
+}
+
+/* Título da página */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1em;
+  color: #222;
+}
+
+/* Container principal dos dados */
+#dadosUsuarios {
+  width: 90%;
+  max-width: 960px;
+  margin: 0 auto 2em auto;
+  overflow-x: auto;
+}
+
+/* Tabela de usuários */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* Mensagem de usuário desconectado */
+#welcomeMessage {
+  width: 90%;
+  max-width: 800px;
+  margin: 1.5em auto;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 1em;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 1.05em;
+}
+
+#welcomeMessage a {
+  color: #0077cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#welcomeMessage a:hover {
+  text-decoration: underline;
+}
+
+#cat{
+  height: 300px;
+  width: auto;
+  justify-content: center;
+  display: flex;
+}

@@ -1,10 +1,142 @@
+/* Reset e base */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header e Navbar fixa */
+header {
+    background-color: #333;
+    padding: 1em 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 nav ul {
-  list-style: none;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+nav ul li a {
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Espaçamento para compensar a navbar fixa */
+#main {
+    max-width: 960px;
+    margin: 6em auto 2em auto;
+    padding: 0 1em;
+}
+
+/* Slideshow */
+.slideshow {
+    position: relative;
+    max-width: 100%;
+    height: 400px;
+    overflow: hidden;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Texto */
+section#home h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #222;
+}
+
+section#content p {
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2em 1em;
+    text-align: center;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+footer a {
+    color: #ffcc00;
+    text-decoration: none;
+    margin: 0 0.3em;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* Responsivo */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .slideshow {
+        height: 250px;
+    }
+
+    section#home h1 {
+        font-size: 2em;
+    }
+
+    section#content p {
+        font-size: 1em;
+    }
 }

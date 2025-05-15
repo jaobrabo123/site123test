@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
     <title>Minigames</title>
 </head>
 <body>
@@ -20,11 +22,25 @@
     </header>
     <div id="main">
         <section id="home">
-            <h1>Super Mini-Games</h1>
+            <h1>Mini-Games</h1>
             <p id="welcomeMessage"></p>
         </section>
 
     </div>
+    <footer>
+    <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>
+
+    <p>
+        <i class="fa-brands fa-instagram"></i> joaofreire29 <i class="fa-solid fa-envelope"></i> jp2904.lindo@gmail.com <i class="fa-brands fa-whatsapp"></i> 79 9 9146-0078
+    </p>
+
+    <p>
+        Criado por João Pedro Azevedo Freire Mecenas<br>
+        Desenvolvido com HTML, CSS, JavaScript, Node.js e SQLite
+    </p>
+
+    <p><a href="#home">Voltar ao topo ↑</a></p>
+    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
