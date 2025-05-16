@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--https://fontawesome.com/search?q=email&o=r-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="js/script.js" defer></script>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/minigames.css">
     <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
-    <title>Minigames</title>
+    <script src="js/script.js" defer></script>
+    <script src="js/index.js" defer></script>
+    <title>Xadrez</title>
+    
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="./index.html">Início</a></li>
-                <li><a href="#home">Mini-Games</a></li>
+                <li><a href="./index.html">Início</a></li> 
+                <li><a href="./minigames.html">Mini-Games</a></li>
                 <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
                 <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
             </ul>
@@ -23,46 +25,20 @@
     </header>
     <div id="main">
         <section id="home">
-            <h1>Mini-Games</h1>
+            <h1>Xadrez</h1>
             <p id="welcomeMessage"></p>
+            <p></p>
         </section>
         <section id="content">
-            <div id="games">
-                <div id="tictactoe" class="jogos12">
-                    <a href="jogodavelha.html">
-                        <img src="imgs/jogodavelha-icone.png" alt="Jogo da velha">
-                        <p>Jogo da Velha</p>
-                    </a>
-                </div>
-                <div id="chess" class="jogos12">
-                    <a href="xadrez.html">
-                        <img src="imgs/xadrez-icone.png" alt="Xadrez">
-                        <p>Xadrez</p>
-                    </a>
-                </div>
-                <div id="checkers" class="jogos12">
-                    <a href="damas.html">
-                        <img src="imgs/damas-icone.png" alt="Damas">
-                        <p>Damas</p>
-                    </a>
-                </div>
-                <div id="sudocu" class="jogos12">
-                    <a href="sudoku.html">
-                        <img src="imgs/sudoku-icone.png" alt="Sudoku">
-                        <p>Sudoku</p>
-                    </a>
-                </div>
-                <div id="bombgame" class="jogos12">
-                    <a href="campominado.html">
-                        <img src="imgs/campominado-icone.png" alt="Campo minado">
-                        <p>Campo Minado</p>
-                    </a>
-                </div>
+            <div id="tempbuilder" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 10px;">
+                <img src="imgs/construtor-clash-of-clans-builder.png" alt="Builder" style="height: 500px; width: auto; ">
+                <p style="color: red; margin-top: 10px; font-size: 1.5em;">EM DESENVOLVIMENTO</p>
             </div>
         </section>
     </div>
     <footer>
     <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>
+
 
     <p>
         <i class="fa-brands fa-instagram"></i> joaofreire29 <i class="fa-solid fa-envelope"></i> jp2904.lindo@gmail.com <i class="fa-brands fa-whatsapp"></i> 79 9 9146-0078
@@ -75,7 +51,9 @@
 
     <p><a href="#home">Voltar ao topo ↑</a></p>
     </footer>
+
     <script>
+        // Verificar se o usuário está logado
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
             
@@ -111,6 +89,9 @@
                 document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar um conta!`;
             }
         });
+
+        // Função para logout
+        
     </script>
 </body>
 </html>

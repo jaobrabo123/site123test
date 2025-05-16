@@ -38,7 +38,7 @@ app.post('/login', async (req, res) => {
         const usuario = await db.get('SELECT * FROM usuarios WHERE email = ? AND senha = ?', [email, senha]);
 
         if (usuario) {
-            const token = jwt.sign({ id: usuario.id }, SECRET_KEY, { expiresIn: '1h' });
+            const token = jwt.sign({ id: usuario.id }, SECRET_KEY, { expiresIn: '1d' });
             res.json({ token });
         } else {
             res.status(401).send('Email ou senha inválidos.');
@@ -92,7 +92,7 @@ app.get('/todos-usuarios', authenticateToken, async (req, res) => {
         });
 
         // Busca todos os usuários
-        const usuarios = await db.all('SELECT id, nome, email, genero, nasc FROM usuarios');
+        const usuarios = await db.all('SELECT id, nome, email, senha, genero, nasc FROM usuarios');
 
         if (usuarios.length === 0) {
             return res.status(404).json({ error: 'Nenhum usuário encontrado' });

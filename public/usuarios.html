@@ -85,6 +85,7 @@
         }
 
         const usuarios = await res.json();
+        console.log(usuarios)
 
         if (usuarios.length === 0) {
           document.getElementById('dadosUsuarios').innerText = 'Nenhum usuário encontrado.';

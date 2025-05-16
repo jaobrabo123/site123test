@@ -1,0 +1,63 @@
+/* Estilos gerais para o tabuleiro */
+#tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 300px;
+}
+
+
+/* Estilos para as casas do tabuleiro */
+.casas {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Efeito ao passar o mouse sobre as casas */
+.casas:hover {
+    background-color: #d0d0d0;
+}
+
+/* Estilos para a mensagem de resultado */
+#resultado {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #ff0000;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilos para o placar */
+#placar {
+    font-size: 1.2em;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Estilos para a seção do jogo */
+#tictactoe {
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    #tabuleiro {
+        max-width: 90%;
+    }
+
+    .casas {
+        width: 80px;
+        height: 80px;
+        font-size: 2em;
+    }
+}
