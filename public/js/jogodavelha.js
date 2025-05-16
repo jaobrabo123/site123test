@@ -13,6 +13,7 @@ const resultado = document.querySelector("#resultado")
 var pontuacaoX = 0
 var pontuacaoO = 0
 var jogoAtivo = true
+var winner = ""
 
 function jogar(casa) {
     if (!jogoAtivo) return;
@@ -24,9 +25,11 @@ function jogar(casa) {
     var vezvalor = vez.textContent
     if (vezvalor === "Vez do X"){
         casas[casa].innerHTML = "X"
+        winner = 'X'
         vez.innerHTML = "Vez do O"
     } else{
         casas[casa].innerHTML = "O"
+        winner = 'O'
         vez.innerHTML = "Vez do X"
     }
 
@@ -44,49 +47,49 @@ function jogar(casa) {
         poss1.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if(poss2[0].textContent !== "" && Array.from(poss2).every(casinha => casinha.textContent === poss2[0].textContent)){
         jogoAtivo = false
         poss2.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if (poss3[0].textContent !== "" && Array.from(poss3).every(casinha => casinha.textContent === poss3[0].textContent)){
         jogoAtivo = false
         poss3.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if (poss4[0].textContent !== "" && Array.from(poss4).every(casinha => casinha.textContent === poss4[0].textContent)){
         jogoAtivo = false
         poss4.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if (poss5[0].textContent !== "" && Array.from(poss5).every(casinha => casinha.textContent === poss5[0].textContent)){
         jogoAtivo = false
         poss5.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if (poss6[0].textContent !== "" && Array.from(poss6).every(casinha => casinha.textContent === poss6[0].textContent)){
         jogoAtivo = false
         poss6.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if (poss7[0].textContent !== "" && Array.from(poss7).every(casinha => casinha.textContent === poss7[0].textContent)){
         jogoAtivo = false
         poss7.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if (poss8[0].textContent !== "" && Array.from(poss8).every(casinha => casinha.textContent === poss8[0].textContent)){
         jogoAtivo = false
         poss8.forEach(element => {
             element.style.background = 'rgb(140, 255, 86)'
         })
-        setTimeout(vitoria,1000)
+        setTimeout(() => vitoria(winner),1000)
     } else if (Array.from(casas).every(casa => casa.textContent !== "")){
         jogoAtivo = false
         casas.forEach(gugu => {
@@ -97,7 +100,12 @@ function jogar(casa) {
             element.innerHTML = ''
             element.style.background = ''
             })
-            vez.innerHTML = "Vez do X"
+            if (winner === 'X'){
+                vez.innerHTML = `Vez do O`
+            }
+            else{
+                vez.innerHTML = `Vez do X`
+            }
             resultado.innerHTML = "Deu velha!"
             jogoAtivo = true
             return;
@@ -105,10 +113,9 @@ function jogar(casa) {
     }
 }
 
-function vitoria(){
-    var vezvalor = vez.textContent
-    var ganhador = vezvalor == "Vez do O" ? "X" : "O";
-    if(vezvalor == "Vez do O"){
+function vitoria(winner){
+    var ganhador = winner
+    if(ganhador == "X"){
         pontuacaoX++
     } else{
         pontuacaoO++
@@ -118,7 +125,7 @@ function vitoria(){
     guis.innerHTML = ''
     guis.style.background = ''
     })
-    vez.innerHTML = "Vez do X"
+    vez.innerHTML = `Vez do ${ganhador}`
     resultado.innerHTML = `"${ganhador}" ganhou!`
     jogoAtivo = true
 }

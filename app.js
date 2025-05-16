@@ -23,3 +23,4 @@ export async function criarEPopularTabelaUsuarios(nome, email, senha, genero, na
         [nome, email, senha, genero, nasc]
     )
 }
+
