@@ -92,7 +92,7 @@
           return;
         }
 
-        let htmlContent = '<table><tr><th>ID</th><th>Nome</th><th>Email</th><th>Senha</th><th>Gênero</th><th>Data de Nascimento</th></tr>';
+        let htmlContent = '<table><tr><th>ID</th><th>Nome</th><th>Email</th><th>Senha</th><th>Gênero</th><th>Data de Nascimento</th><th>Tipo Usuário</th></tr>';
 
         usuarios.forEach(usuario => {
           htmlContent += `
@@ -103,6 +103,7 @@
               <td>${usuario.senha}</td>
               <td>${usuario.genero}</td>
               <td>${usuario.nasc}</td>
+              <td>${usuario.tipo_usua}</td>
             </tr>
           `;
         });
