@@ -12,15 +12,16 @@
     
     <title>Login</title>
 </head>
-<body>
-    <header>
-    <nav>
-        <ul>
-            <li><a href="./index.html">Início</a></li>
-            <li><a href="./minigames.html">Mini-Games</a></li>
-            <li id="loginMenuItem"><a href="#home">Login/Cadastro</a></li>
-        </ul>
-    </nav>
+<body class="no-search">
+     <header id="header-placeholder"></header> 
+     <script>
+        fetch('components/header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Erro ao carregar o header:', error));
+    </script>
     </header>
     <main class="login-container" id="arer">
     <div id="cadastroForm" class="form-box">
@@ -38,7 +39,7 @@
         <img src="imgs/eye-closed.png" alt="Ocultar / Revelar senha" id="olhinho" onclick="ocultar()">
         <input type="date" id="nasc"><br>
         <button onclick="enviarUsuario()" id="botaocadastrar">Cadastrar</button>
-        <p class="switch-link"><a href="#" onclick="mostrarLogin()">Já tem uma conta?</a></p>
+        <p id="go-to-login-button" class="switch-link"><a href="#" onclick="mostrarLogin()">Já tem uma conta?</a></p>
     </div>
 
     <div id="loginForm" class="form-box" style="display: none;">

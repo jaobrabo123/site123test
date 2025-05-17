@@ -112,3 +112,14 @@ select:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
+#go-to-login-button{
+    background-color: greenyellow;
+    border-radius: 20px;
+    width: 200px;
+    display: block;
+    margin: 0 auto;  
+    margin-top: 4px;       /* defina a altura */
+
+}
+    

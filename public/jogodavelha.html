@@ -14,16 +14,15 @@
     
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="./index.html">Início</a></li> 
-                <li><a href="./minigames.html">Mini-Games</a></li>
-                <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
-                <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
-            </ul>
-        </nav>
-    </header>
+     <header id="header-placeholder"></header> 
+     <script>
+        fetch('components/header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Erro ao carregar o header:', error));
+    </script>
     <div id="main">
         <section id="home">
             <h1>Jogo da Velha</h1>

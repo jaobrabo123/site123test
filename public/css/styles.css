@@ -92,22 +92,69 @@ footer a:hover {
 }
 
 
+/* Container geral dos jogos */
+#games {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2em;
+    margin-top: 2em;
+    padding: 1em;
+}
+
+/* Estilo base de cada jogo */
+.jogos12 {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 1em;
+}
+
+.jogos12:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagens dos jogos */
+.jogos12 img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5em;
+}
+
+/* Título abaixo da imagem */
+.jogos12 p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Links */
+.jogos12 a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /* Responsivo */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
+@media (max-width: 480px) {
+    #games {
+        grid-template-columns: 1fr 1fr;
         gap: 1em;
     }
 
-    .slideshow {
-        height: 250px;
+    .jogos12 img {
+        width: 60px;
+        height: 60px;
     }
 
-    section#home h1 {
-        font-size: 2em;
-    }
-
-    section#content p {
+    .jogos12 p {
         font-size: 1em;
     }
 }
+
