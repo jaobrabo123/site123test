@@ -13,43 +13,23 @@
     
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Início</a></li> 
-                <li><a href="./minigames.html">Mini-Games</a></li>
-                <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
-                <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header id="header-placeholder"></header> 
+     <script>
+        fetch('components/header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Erro ao carregar o header:', error));
+    </script>
+
     <div id="main">
         <section id="home">
-            <h1>Super Mini-Games</h1>
             <p id="welcomeMessage"></p>
+            <h1>Minijogos:</h1>
             <p></p>
         </section>
-        <section id="content">
-            <div class="slideshow">
-                <div class="slide">
-                    <img src="imgs/xadrez-novo.jpg" alt="Xadrez">
-                </div>
-                <div class="slide">
-                    <img src="imgs/damas-novo.jpg" alt="Damas">
-                </div>
-                <div class="slide">
-                    <img src="imgs/sudoku-novo.jpg" alt="Sudoku">
-                </div>
-                <div class="slide">
-                    <img src="imgs/jogodavelha-novo.jpg" alt="Jogo da velha">
-                </div>
-                <div class="slide">
-                    <img src="imgs/campominado-novo.png" alt="Campo Minado">
-                </div>
-            </div>
-            <p>Jogue diversos mini-games em nosso site! Temos <strong>Xadrez, Damas, Sudoku, Jogo da velha e Campo Minado</strong>! Clique <a href="./minigames.html">aqui</a> para ver nossos mini-games!</p>
-            <p>Veja também o nosso <strong>Rank</strong> dos melhores jogadores de cada mini-game clicando <a href="./rank.html">aqui</a>!</p>
-        </section>
+       
     </div>
     <footer>
     <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Debussy';
+    src: url(../fonts/debussy.ttf);
+}
+
 /* Reset e base */
 * {
     margin: 0;
@@ -7,7 +12,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Debussy', sans-serif;
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.6;
@@ -22,41 +27,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Header e Navbar fixa */
-header {
-    background-color: #333;
-    padding: 1em 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 2em;
-}
-
-nav ul li a {
-    color: white;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #ffcc00;
-}
-
-/* Espaçamento para compensar a navbar fixa */
-#main {
-    max-width: 960px;
-    margin: 6em auto 2em auto;
-    padding: 0 1em;
-}
 
 /* Slideshow */
 .slideshow {
@@ -102,7 +73,7 @@ section#content p {
 
 /* Footer */
 footer {
-    background-color: #333;
+    background-color: #0055c6;
     color: white;
     padding: 2em 1em;
     text-align: center;
