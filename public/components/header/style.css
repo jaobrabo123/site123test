@@ -10,11 +10,13 @@ header {
 }
 
 nav ul {
-    list-style: none;
     display: flex;
-    justify-content: center;
-    gap: 2em;
-}
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+    }
 
 nav ul li a {
     color: white;
@@ -31,4 +33,39 @@ nav ul li a:hover {
     max-width: 960px;
     margin: 6em auto 2em auto;
     padding: 0 1em;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search-box input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.search-box input:focus {
+  border-color: #666;
+}
+
+.search-box button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.loginButton {
+    background-color: #38b6ff;
+  padding: 5px 10px;
+  border: 1px solid;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
 }

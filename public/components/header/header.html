@@ -10,11 +10,15 @@
     <header>
         <nav>
             <ul>
-                <li><img src="./imgs/icons8-cardápio-50.png"></li>
-                <li><a href="#home"><img src="./imgs/logo_Super_Mini-Jogos.png"></a></li> 
-                <li><a href="./minigames.html">Mini-Games</a></li>
-                <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
-                <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
+                <li class="menu-icon"><img src="./imgs/icons8-cardápio-50.png">
+                    <a href="#home"><img src="./imgs/logo_Super_Mini-Jogos.png"></a>
+                </li>
+                <li class="search-box">
+                    <input type="text" placeholder="Buscar jogos...">
+                    <button type="submit">🔍</button>
+                </li>
+                <li class="loginButton" id="loginMenuItem"><a href="./login.html">Entrar</a></li>
+                <li class="loginButton" id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
             </ul>
         </nav>
     </header>
