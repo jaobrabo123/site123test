@@ -9,5 +9,4 @@ function logout() {
     document.querySelector('#dadosUsuarios').style.display = 'none';
     document.querySelector('#cat').style.display = 'flex';
     document.querySelector('#cat').innerHTML = `<img src="imgs/gato.png" alt="Gato">`
-    location.reload();
 }

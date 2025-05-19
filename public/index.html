@@ -68,42 +68,6 @@
                         <p>Campo Minado</p>
                     </a>
                 </div>
-                 <div id="bombgame" class="jogos12">
-                    <a href="campominado.html">
-                        <img src="imgs/hangman-game.png" alt="Campo minado">
-                        <p>Jogo Da Forca</p>
-                    </a>
-                </div>
-                 <div id="bombgame" class="jogos12">
-                    <a href="campominado.html">
-                        <img src="imgs/number-blocks.png" alt="Campo minado">
-                        <p>Adivinhe o Numero</p>
-                    </a>
-                </div>
-                 <div id="bombgame" class="jogos12">
-                    <a href="campominado.html">
-                        <img src="imgs/question-solid.svg" alt="Campo minado">
-                        <p>Jogo da Memoria</p>
-                    </a>
-                </div>
-                 <div id="bombgame" class="jogos12">
-                    <a href="campominado.html">
-                        <img src="imgs/question-solid.svg" alt="Campo minado">
-                        <p>Cobrinha</p>
-                    </a>
-                </div>
-                 <div id="bombgame" class="jogos12">
-                    <a href="campominado.html">
-                        <img src="imgs/breakout-room.png" alt="Campo minado">
-                        <p>Beakout</p>
-                    </a>
-                </div>
-                 <div id="bombgame" class="jogos12">
-                    <a href="campominado.html">
-                        <img src="imgs/speech-bubble.png" alt="Campo minado">
-                        <p>Quiz</p>
-                    </a>
-                </div>
             </div>
         </section>
     </div>
@@ -144,7 +108,7 @@
                 })
                 .then(data => {
                     console.log(data); // Verifique o retorno para confirmar
-                    document.querySelector('#welcomeMessage').innerHTML = `Olá, <strong>${data.nome}</strong>!`;
+                    document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
                     document.querySelector('#loginMenuItem').style.display = 'none';
                     document.querySelector('#logoutMenuItem').style.display = 'block';
                 })
