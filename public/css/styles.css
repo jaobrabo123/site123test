@@ -158,3 +158,31 @@ footer a:hover {
     }
 }
 
+#sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(17, 17, 17, 0.8); /* preto com 80% de opacidade */
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+#sidebar a {
+  display: block;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+}
+
+#sidebar .closebtn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 30px;
+  cursor: pointer;
+}
+

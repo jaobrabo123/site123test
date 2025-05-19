@@ -17,8 +17,11 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
+                   verificarLoginStatus();
+                   carregarTodosUsuarios();
             })
             .catch(error => console.error('Erro ao carregar o header:', error));
+            
     </script>
     <h1>Todos os Usuários</h1>
   
@@ -116,8 +119,7 @@
     }
 
     // Chama a função para verificar o estado de login e carregar os usuários
-    verificarLoginStatus();
-    carregarTodosUsuarios();
+ 
   </script>
 </body>
 </html>

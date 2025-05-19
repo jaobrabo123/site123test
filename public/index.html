@@ -21,7 +21,15 @@
                 document.getElementById('header-placeholder').innerHTML = data;
             })
             .catch(error => console.error('Erro ao carregar o header:', error));
+
+            document.getElementById('menuIcon').onclick = toggleSidebar;   
     </script>
+
+    <div id="sidebar">
+         <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+         <a href="index.html">Início</a>
+         <a href="login.html">Login</a>
+    </div>
 
     <div id="main">
         <section id="home">
@@ -117,7 +125,11 @@
             }
         });
 
-        // Função para logout
+        // Função da SideBar
+        function toggleSidebar() {
+           const sidebar = document.getElementById("sidebar");
+           sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+        }
         
     </script>
 </body>
