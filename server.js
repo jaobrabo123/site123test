@@ -1,5 +1,6 @@
 import express from 'express';
 import { criarEPopularTabelaUsuarios } from './app.js';
+import { criarEPopularTabelaInfoExtra } from './app.js'
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import jwt from 'jsonwebtoken';

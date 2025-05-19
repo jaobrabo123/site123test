@@ -1,0 +1,3 @@
+function alterarImg(){
+    alert("funcionou")
+}
