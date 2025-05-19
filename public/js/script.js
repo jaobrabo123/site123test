@@ -1,5 +1,6 @@
 function logout() {
     localStorage.removeItem('token');
+    window.location.href = window.location.pathname;
     alert('Você foi desconectado.');
     document.querySelector('#loginMenuItem').style.display = 'block';
     document.querySelector('#logoutMenuItem').style.display = 'none';
@@ -9,5 +10,5 @@ function logout() {
     document.querySelector('#dadosUsuarios').style.display = 'none';
     document.querySelector('#cat').style.display = 'flex';
     document.querySelector('#cat').innerHTML = `<img src="imgs/gato.png" alt="Gato">`
-    location.reload();
+   
 }
