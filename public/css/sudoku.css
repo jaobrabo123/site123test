@@ -1,0 +1,143 @@
+.casas {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black; /* Adiciona bordas finas para cada célula */
+}
+
+.casas:hover {
+    background-color: rgb(209, 209, 209);
+    transition: 0.3s;
+}
+
+#sudoku {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+#tab2 {
+    background-color: gray;
+    width: min-content;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(9, 50px);
+    grid-template-rows: repeat(9, 50px);
+    gap: 0; /* Remove espaço extra entre as células */
+}
+
+#casa2, #casa5, #casa11, #casa14, #casa20, #casa23, #casa29, #casa32,
+#casa38, #casa41, #casa47, #casa50, #casa56, #casa59, #casa65, #casa68, #casa74, #casa77 {
+    border-right: solid 3px black !important; /* Define a espessura das bordas divisórias verticais */
+}
+
+#casa18, #casa19, #casa20, #casa21, #casa22, #casa23, #casa24, #casa25,
+#casa26, #casa45, #casa46, #casa47, #casa48, #casa49, #casa50, #casa51,
+#casa52, #casa53 {
+    border-bottom: solid 3px black !important; /* Define a espessura das bordas divisórias horizontais */
+}
+
+#opcao {
+    display: flex;
+    flex-wrap: wrap; /* Quebra as linhas para ajustar o layout */
+    justify-content: center; /* Centraliza os elementos */
+    gap: 10px; /* Espaço entre os itens */
+}
+
+#opcao label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; /* Espaço entre o botão de rádio e o texto */
+    padding: 5px;
+    border: 1px solid #000; /* Adiciona uma borda ao redor do rótulo */
+    border-radius: 5px; /* Bordas arredondadas */
+    background-color: white;
+    cursor: pointer; /* Altera o cursor para indicar que é clicável */
+    transition: all 0.2s ease-in-out;
+}
+
+#opcao label:hover {
+    background-color: white; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.1); /* Aumenta ligeiramente o tamanho */
+}
+
+/* Esconde os inputs de rádio */
+#opcao .radio {
+    appearance: none; /* Remove o estilo padrão */
+    width: 15px;
+    height: 15px;
+    border: 2px solid #000; /* Borda preta */
+    border-radius: 50%; /* Torna o botão circular */
+    cursor: pointer; /* Indica clicável */
+    transition: background-color 0.3s ease;
+    display: none; /* Oculta o botão de rádio */
+}
+
+/* Estilo do label associado ao botão de rádio selecionado */
+#opcao .radio:checked + label {
+    background-color: #007BFF; /* Cor azul para o label selecionado */
+    color: white; /* Cor do texto para contraste */
+    border-color: #0056b3; /* Altera a cor da borda */
+}
+
+#opcao label .radio + span {
+    font-size: 1.2em; /* Ajusta o tamanho do texto */
+    color: #000;
+}
+
+select{
+    width: min-content;
+    font-size: 1em;
+}
+
+select option{
+    font-size: 0.7em;
+}
+
+.status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#personalizado {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px; /* <<< Limita a largura */
+    font-size: 0.9em;   /* <<< Corrige o tamanho da fonte */
+}
+
+#personalizado label {
+    font-size: 0.9em;
+}
+
+#personalizado input[type="number"] {
+    width: 100%;
+    padding: 6px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.painel-superior{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

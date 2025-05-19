@@ -7,33 +7,85 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/sudoku.css">
+    <script src="js/sudoku.js"></script>
     <script src="js/script.js" defer></script>
     <script src="js/index.js" defer></script>
-    <title>Sudoku</title>
+    <title>Super Mini-Games</title>
     
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="./index.html">Início</a></li> 
-                <li><a href="./minigames.html">Mini-Games</a></li>
-                <li id="loginMenuItem"><a href="./login.html">Login/Cadastro</a></li>
-                <li id="logoutMenuItem" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
-            </ul>
-        </nav>
-    </header>
+     <header id="header-placeholder"></header> 
+     <script>
+        fetch('components/header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Erro ao carregar o header:', error));
+    </script>
     <div id="main">
         <section id="home">
-            <h1>Sudoku</h1>
+            <h1>Super Mini-Games</h1>
             <p id="welcomeMessage"></p>
             <p></p>
         </section>
         <section id="content">
-            <div id="tempbuilder" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 10px;">
-                <img src="imgs/construtor-clash-of-clans-builder.png" alt="Builder" style="height: 500px; width: auto; ">
-                <p style="color: red; margin-top: 10px; font-size: 1.5em;">EM DESENVOLVIMENTO</p>
+            <div id="sudoku">
+            <h1>Sudoku</h1>
+            <div class="painel-superior">
+                <label for="dificuldade">Dificuldade:</label>
+                <select name="dificuldade" id="dificuldade" onchange="verificaOpcao(this)">
+                    <option value="1">Fácil</option>
+                    <option value="2" selected>Médio</option>
+                    <option value="3">Difícil</option>
+                    <option value="4">Personalizado</option>
+                </select>
+                <div id="personalizado" style="display: none;">
+                    <label for="casasEscondidas">Casas Ocultas:</label>
+                    <input type="number" name="casasEscondidas" id="casasEscondidas">
+                    <label for="vidasPersona">Vidas:</label>
+                    <input type="number" name="vidasPersona" id="vidasPersona">
+                </div>
             </div>
+            <button onclick="gerarTabuleiro()" id="button">Jogar</button>
+
+            <div class="status">
+                <p id="textin" style="display: none;">Vidas: 10</p>
+                <p id="cronometro" style="display: none;">Tempo: 00:00</p>
+            </div>
+            <div id="tabuleiro" style="display: none;">
+                <div id="tab2"></div>
+            </div>
+            <div id="opcao" style="display: none;">
+                <input type="radio" id="radio1" class="radio" name="numSelec" value="1" onchange="destacar(this)">
+                <label for="radio1">1</label>
+
+                <input type="radio" id="radio2" class="radio" name="numSelec" value="2" onchange="destacar(this)">
+                <label for="radio2">2</label>
+
+                <input type="radio" id="radio3" class="radio" name="numSelec" value="3" onchange="destacar(this)">
+                <label for="radio3">3</label>
+
+                <input type="radio" id="radio4" class="radio" name="numSelec" value="4" onchange="destacar(this)">
+                <label for="radio4">4</label>
+
+                <input type="radio" id="radio5" class="radio" name="numSelec" value="5" onchange="destacar(this)">
+                <label for="radio5">5</label>
+
+                <input type="radio" id="radio6" class="radio" name="numSelec" value="6" onchange="destacar(this)">
+                <label for="radio6">6</label>
+
+                <input type="radio" id="radio7" class="radio" name="numSelec" value="7" onchange="destacar(this)">
+                <label for="radio7">7</label>
+
+                <input type="radio" id="radio8" class="radio" name="numSelec" value="8" onchange="destacar(this)">
+                <label for="radio8">8</label>
+
+                <input type="radio" id="radio9" class="radio" name="numSelec" value="9" onchange="destacar(this)">
+                <label for="radio9">9</label>
+            </div>
+        </div>
         </section>
     </div>
     <footer>
