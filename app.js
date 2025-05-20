@@ -25,7 +25,7 @@ export async function criarEPopularTabelaUsuarios(nome, email, senha, genero, na
     )
 }
 
-export async function criarEPopularTabelaInfoExtra(campo, valor) {
+export async function criarEPopularTabelaInfoExtra(idusuario) {
     const db = await open({
         filename: './database.db',
         driver: sqlite3.Database
@@ -34,21 +34,20 @@ export async function criarEPopularTabelaInfoExtra(campo, valor) {
     await db.run(`
         CREATE TABLE IF NOT EXISTS info_extra (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            foto_perfil TEXT,
-            descricao TEXT,
-            pontuacao_geral INT,
-            pontuacao_xadrez INT,
-            pontuacao_damas INT,
-            pontuacao_tictactoe INT,
-            pontuacao_sudoku INT,
-            pontuacao_minado INT,
-            id_usua INTEGER,
+            foto_perfil TEXT DEFAULT '/imgs/iconeperfil.png',
+            descricao TEXT DEFAULT 'sua descricao',
+            pontuacao_xadrez INT DEFAULT 0,
+            pontuacao_damas INT DEFAULT 0,
+            pontuacao_tictactoe INT DEFAULT 0,
+            pontuacao_sudoku INT DEFAULT 0,
+            pontuacao_minado INT DEFAULT 0,
+            id_usua INTEGER UNIQUE,
             FOREIGN KEY (id_usua) REFERENCES usuarios(id)
         )
     `)
+    const existente = await db.get(`SELECT * FROM info_extra WHERE id_usua = ?`, [idusuario]);
 
-    await db.run(
-        `INSERT INTO info_extra (${campo}) VALUES (?)`,
-        [valor]
-    )
+    if (!existente) {
+        await db.run(`INSERT INTO info_extra (id_usua) VALUES (?)`, [idusuario]);
+    }
 }

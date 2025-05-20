@@ -53,7 +53,13 @@ app.post('/login', async (req, res) => {
 app.post('/usuarios', async (req, res) => {
     const { nome, email, senha, genero, nasc } = req.body;
     try {
+        const db = await open({
+            filename: './database.db',
+            driver: sqlite3.Database,
+        });
         await criarEPopularTabelaUsuarios(nome, email, senha, genero, nasc);
+        const idusua = await db.get('SELECT id FROM usuarios WHERE email = ?', [email]);
+        await criarEPopularTabelaInfoExtra(Number(idusua.id));
         res.status(200).send('Usuário inserido com sucesso!');
     } catch (error) {
         res.status(500).send('Erro ao inserir usuário: ' + error.message);
@@ -78,6 +84,28 @@ app.get('/usuarios', authenticateToken, async (req, res) => {
         res.json(usuario);
     } catch (error) {
         res.status(500).send('Erro ao buscar usuário: ' + error.message);
+    }
+});
+
+app.get('/infoextra', authenticateToken, async (req, res) => {
+    try {
+        const db = await open({
+            filename: './database.db',
+            driver: sqlite3.Database,
+        });
+
+        // Busca o usuário baseado no ID contido no token JWT
+        const usuario = await db.get('SELECT * FROM usuarios WHERE id = ?', [req.user.id]);
+
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        const infoextra = await db.get('SELECT * FROM info_extra WHERE id = ?', [Number(usuario.id)]);
+
+        res.json(infoextra);
+    } catch (error) {
+        res.status(500).send('Erro ao buscar info_extra: ' + error.message);
     }
 });
 
