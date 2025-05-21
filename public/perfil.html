@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/perfil.css">
     <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
     <script src="js/script.js" defer></script>
-    <script src="js/index.js" defer></script>
     <script src="js/perfil.js" defer></script>
     <title>Super Mini-Games</title>
     
@@ -21,57 +20,7 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Erro ao carregar o header:', error));
-    </script>
-    <div id="main">
-        <section id="home">
-            <h1>Super Mini-Games</h1>
-            <p></p>
-        </section>
-        <section id="content">
-            <div id="perfil">
-                <img src="imgs/perfil-de-usuario.png" alt="Foto de Perfil" onclick="alterarImg()" id="fotoPerfil">
-                <div id="nomeEDescricao">
-                    <div id="nomePerfil">
-                        <p id="nomeDoPerfil"></p>
-                    </div>
-                    <div id="descricaoPerfil"  style="display: none;">
-                        <p id="descricaoDoPerfil"></p>
-                    </div>
-                </div>
-                
-            </div>
-            <div id="pontuacao">
-                <p id="xadrez">Xadrez: </p>
-                <p id="damas">Damas: </p>
-                <p id="tictactoe">Jogo-da-velha: </p>
-                <p id="sudoku">Sudoku: </p>
-                <p id="minado">Campo-minado: </p>
-            </div>
-
-        </section>
-    </div>
-    <footer>
-    <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>
-
-
-    <p>
-        <i class="fa-brands fa-instagram"></i> joaofreire29 <i class="fa-solid fa-envelope"></i> jp2904.lindo@gmail.com <i class="fa-brands fa-whatsapp"></i> 79 9 9146-0078
-    </p>
-
-    <p>
-        Criado por João Pedro Azevedo Freire Mecenas<br>
-        Desenvolvido com HTML, CSS, JavaScript, Node.js e SQLite
-    </p>
-
-    <p><a href="#home">Voltar ao topo ↑</a></p>
-    </footer>
-
-    <script>
-        // Verificar se o usuário está logado
-        document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('token');
+                const token = localStorage.getItem('token');
             
             if (token) {
                 // Se estiver logado, exibir mensagem de boas-vindas
@@ -130,10 +79,62 @@
                 document.querySelector('#logoutMenuItem').style.display = 'none';
                 document.querySelector('#descricaoPerfil').style.display = 'none';
             }
-        });
-
-
-        
+            document.getElementById('menuIcon')?.addEventListener('click', toggleSidebar);
+            })
+            .catch(error => console.error('Erro ao carregar o header:', error));
+            
     </script>
+    <div id="main">
+        <section id="home">
+            <h1>Super Mini-Games</h1>
+        </section>
+        <section id="content">
+            <div id="perfil">
+                <div id="foto">
+                    
+                    <img src="imgs/perfil-de-usuario.png" alt="Foto de Perfil" id="fotoPerfil">
+                    
+                    <!--<input type="file" name="adicionarIMG" id="inputFoto" accept="image/*" style="display: none;">-->
+                    <label for="inputFoto" id="inputIMG">Alterar imagem:</label>
+                    <input type="text" name="inputFoto" id="inputFoto" placeholder="Digite aqui a url da imagem">
+                    <button onclick="enviarImagem()">Enviar</button>
+                </div>   
+                <div id="nomeEDescricao">
+                    <div id="nomePerfil">
+                        <p id="nomeDoPerfil"></p>
+                    </div>
+                    <div id="descricaoPerfil"  style="display: none;">
+                        <p id="descricaoDoPerfil"></p>
+                    </div>
+                </div>
+                
+            </div>
+            <div id="pontuacao">
+                <p id="xadrez">Xadrez: </p>
+                <p id="damas">Damas: </p>
+                <p id="tictactoe">Jogo-da-velha: </p>
+                <p id="sudoku">Sudoku: </p>
+                <p id="minado">Campo-minado: </p>
+            </div>
+
+        </section>
+    </div>
+    <footer>
+    <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>
+
+
+    <p>
+        <i class="fa-brands fa-instagram"></i> joaofreire29 <i class="fa-solid fa-envelope"></i> jp2904.lindo@gmail.com <i class="fa-brands fa-whatsapp"></i> 79 9 9146-0078
+    </p>
+
+    <p>
+        Criado por João Pedro Azevedo Freire Mecenas<br>
+        Desenvolvido com HTML, CSS, JavaScript, Node.js e SQLite
+    </p>
+
+    <p><a href="#home">Voltar ao topo ↑</a></p>
+    </footer>
+
+    
 </body>
 </html>

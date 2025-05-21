@@ -51,3 +51,11 @@ export async function criarEPopularTabelaInfoExtra(idusuario) {
         await db.run(`INSERT INTO info_extra (id_usua) VALUES (?)`, [idusuario]);
     }
 }
+
+export async function popular2TabelaInfoExtra(atributo, valor, idusua) {
+    const db = await open({
+        filename: './database.db',
+        driver: sqlite3.Database
+    })
+    await db.run(`UPDATE info_extra SET ${atributo} = ? WHERE id_usua = ?`, [valor, idusua])
+}

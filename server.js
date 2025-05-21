@@ -4,6 +4,7 @@ import { criarEPopularTabelaInfoExtra } from './app.js'
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import jwt from 'jsonwebtoken';
+import { popular2TabelaInfoExtra } from './app.js'
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -87,6 +88,17 @@ app.get('/usuarios', authenticateToken, async (req, res) => {
     }
 });
 
+app.post('/infoextra', authenticateToken, async (req, res) => {
+    const { atributo, valor, idusua } = req.body;
+    try {
+        await popular2TabelaInfoExtra(atributo, valor, idusua);
+        res.status(200).send('Usuário inserido com sucesso!');
+    } catch (error) {
+        console.error('Erro no /infoextra:', error.message);
+        res.status(500).send('Erro ao inserir usuário: ' + error.message);
+    }
+});
+
 app.get('/infoextra', authenticateToken, async (req, res) => {
     try {
         const db = await open({
@@ -108,6 +120,8 @@ app.get('/infoextra', authenticateToken, async (req, res) => {
         res.status(500).send('Erro ao buscar info_extra: ' + error.message);
     }
 });
+
+
 
 // Inicia o servidor
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));

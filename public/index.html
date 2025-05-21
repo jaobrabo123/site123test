@@ -14,16 +14,51 @@
 </head>
 <body>
   <header id="header-placeholder"></header> 
-     <script>
-        fetch('components/header/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Erro ao carregar o header:', error));
+    <script>
+    // Carregar o header
+    fetch('components/header/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
 
-            document.getElementById('menuIcon').onclick = toggleSidebar;   
+            // Depois que o header foi carregado, pode manipular os elementos dele
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                fetch('/usuarios', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Usuário não autenticado');
+                    }
+                })
+                .then(data => {
+                    document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
+                    document.querySelector('#loginMenuItem').style.display = 'none';
+                    document.querySelector('#logoutMenuItem').style.display = 'block';
+                })
+                .catch(() => {
+                    alert('Sua sessão expirou. Faça login novamente.');
+                    localStorage.removeItem('token');
+                    window.location.href = './login.html';
+                });
+            } else {
+                document.querySelector('#loginMenuItem').style.display = 'block';
+                document.querySelector('#logoutMenuItem').style.display = 'none';
+                document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar um conta!`;
+            }
+
+            // Reatribuir a função toggleSidebar ao menuIcon, pois o HTML foi injetado agora
+            document.getElementById('menuIcon')?.addEventListener('click', toggleSidebar);
+        })
+        .catch(error => console.error('Erro ao carregar o header:', error));
     </script>
+
 
     <div id="sidebar">
          <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
@@ -87,50 +122,6 @@
     <p><a href="#home">Voltar ao topo ↑</a></p>
     </footer>
 
-    <script>
-        // Verificar se o usuário está logado
-        document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('token');
-            
-            if (token) {
-                // Se estiver logado, exibir mensagem de boas-vindas
-                fetch('/usuarios', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json(); // Backend retorna um único usuário
-                    } else {
-                        throw new Error('Usuário não autenticado');
-                    }
-                })
-                .then(data => {
-                    console.log(data); // Verifique o retorno para confirmar
-                    document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
-                    document.querySelector('#loginMenuItem').style.display = 'none';
-                    document.querySelector('#logoutMenuItem').style.display = 'block';
-                })
-                .catch(() => {
-                    alert('Sua sessão expirou. Faça login novamente.');
-                    localStorage.removeItem('token');
-                    window.location.href = './login.html';
-                });
-            } else {
-                // Se não estiver logado, redirecionar para página de login
-                document.querySelector('#loginMenuItem').style.display = 'block';
-                document.querySelector('#logoutMenuItem').style.display = 'none';
-                document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar um conta!`;
-            }
-        });
-
-        // Função da SideBar
-        function toggleSidebar() {
-           const sidebar = document.getElementById("sidebar");
-           sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
-        }
-        
-    </script>
+    
 </body>
 </html>

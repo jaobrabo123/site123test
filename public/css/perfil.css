@@ -16,3 +16,19 @@
     gap: 50px;
 }
 
+#foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+#fotoPerfil {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s;
+}
