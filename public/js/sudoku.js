@@ -116,6 +116,7 @@ function tentativa(casa){
             botao.innerHTML = "Vitória!"
             clearInterval(intervalo)
             jogoativo = false
+            registrarPontuacao(vidas)
         }
     } else{
         vidas = vidas-1
@@ -266,4 +267,62 @@ function verificaOpcao(select) {
 function personalizado() {
     const personalizadu = document.querySelector("#personalizado")
     personalizadu.style.display = "flex"
+}
+
+function registrarPontuacao(vidas) {
+    var valorDif
+    const dificuldade = document.querySelector("#dificuldade");
+    if (dificuldade.value === "4") {
+        return;
+    }else if(dificuldade.value === "1"){
+        valorDif = 0 + vidas
+    }else if(dificuldade.value === "2"){
+        valorDif = 10 + vidas
+    }else if(dificuldade.value === "3"){
+        valorDif = 20 + vidas
+    }
+    const atributo = 'pontuacao_sudoku';
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        return;
+    }
+
+    // Decodificar o JWT para obter o idusua
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const idusua = payload.id;
+
+    // Buscar info_extra atual
+    fetch('/infoextra', {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Erro ao buscar info_extra');
+        return response.json();
+    })
+    .then(data => {
+        const valor = Number(data.pontuacao_sudoku) + valorDif;
+
+        // Atualizar a pontuação no backend
+        return fetch('/infoextra', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ atributo, valor, idusua }),
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Erro ao enviar pontuação");
+            return response.text();
+        })
+        .then(() => {
+            document.querySelector('#pontuacao').textContent = `Pontuação do ${data.nome_usuario}: ${valor}`;
+        });
+    })
+    .catch(err => {
+        alert('Erro ao registrar pontuação: ' + err.message);
+    });
 }

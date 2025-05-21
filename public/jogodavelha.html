@@ -26,7 +26,7 @@
             const token = localStorage.getItem('token');
 
             if (token) {
-                fetch('/usuarios', {
+                fetch('/infoextra', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -39,7 +39,7 @@
                     }
                 })
                 .then(data => {
-                    document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
+                    document.querySelector('#pontuacao').textContent = `Pontuacao do ${data.nome_usuario}: ${data.pontuacao_tictactoe}`;
                     document.querySelector('#loginMenuItem').style.display = 'none';
                     document.querySelector('#logoutMenuItem').style.display = 'block';
                 })
@@ -51,7 +51,7 @@
             } else {
                 document.querySelector('#loginMenuItem').style.display = 'block';
                 document.querySelector('#logoutMenuItem').style.display = 'none';
-                document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar um conta!`;
+                document.querySelector('#pontuacao').innerHTML = `Faça <a href="./login.html">login</a> para exibir e registrar a sua pontuação!`;
             }
 
             // Reatribuir a função toggleSidebar ao menuIcon, pois o HTML foi injetado agora
@@ -62,8 +62,7 @@
     <div id="main">
         <section id="home">
             <h1>Jogo da Velha</h1>
-            <p id="welcomeMessage"></p>
-            <p></p>
+            <p id="pontuacao"></p>
         </section>
         <section id="content">
         <div id="tictactoe">

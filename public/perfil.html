@@ -105,6 +105,12 @@
                     </div>
                     <div id="descricaoPerfil"  style="display: none;">
                         <p id="descricaoDoPerfil"></p>
+                        <input type="text" name="novaDescricao" id="novaDescricao" style="display: none;">
+                        <i class="fa-solid fa-pencil" onclick="editarDescricao()" id="buttonEditar"></i>
+                        <div id="butoes">
+                            <i class="fa-solid fa-floppy-disk" onclick="enviarDescricao()" style="display: none;" id="buttonSave"></i>
+                            <i class="fa-solid fa-ban" style="display: none;" id="buttonCancel" onclick="cancelarDescricao()"></i>
+                        </div>
                     </div>
                 </div>
                 

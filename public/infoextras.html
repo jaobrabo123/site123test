@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Todos os Usuários</title>
+  <script src="js/script.js" defer></script> <!-- Certifique-se de que o script seja carregado -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/usuarios.css">
+  <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+</head>
+<body>
+   <header id="header-placeholder"></header> 
+     <script>
+        fetch('components/header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                   verificarLoginStatus();
+                   carregarTodasInfoextra();
+            })
+            .catch(error => console.error('Erro ao carregar o header:', error));
+            
+    </script>
+    <h1>Todos as Informações Extras</h1>
+  
+    <div id="dadosUsuarios"></div>
+    <div id="welcomeMessage"></div> <!-- Esta mensagem é para o estado de logout -->
+    <div id="cat"></div>
+  
+  <footer>
+    <p>&copy; 2025 Super Mini-Games. Todos os direitos reservados.</p>
+
+
+    <p>
+        <i class="fa-brands fa-instagram"></i> joaofreire29 <i class="fa-solid fa-envelope"></i> jp2904.lindo@gmail.com <i class="fa-brands fa-whatsapp"></i> 79 9 9146-0078
+    </p>
+
+    <p>
+        Criado por João Pedro Azevedo Freire Mecenas<br>
+        Desenvolvido com HTML, CSS, JavaScript, Node.js e SQLite
+    </p>
+
+    <p><a href="#home">Voltar ao topo ↑</a></p>
+    </footer>
+  <script>
+    // Função para verificar se o usuário está logado e atualizar o menu
+    function verificarLoginStatus() {
+      const token = localStorage.getItem('token');
+      
+      if (token) {
+        // Se o token existir, significa que o usuário está logado
+        document.querySelector('#loginMenuItem').style.display = 'none'; // Esconde o link de Login/Cadastro
+        document.querySelector('#logoutMenuItem').style.display = 'block'; // Exibe o link de Logout
+        document.querySelector('#welcomeMessage').style.display = 'none';
+        document.querySelector('#cat').style.display = 'none';
+      } else {
+        // Se não existir o token, significa que o usuário está desconectado
+        document.querySelector('#loginMenuItem').style.display = 'block'; // Exibe o link de Login/Cadastro
+        document.querySelector('#logoutMenuItem').style.display = 'none'; // Esconde o link de Logout
+        document.querySelector('#dadosUsuarios').style.display = 'none';
+        document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar uma conta!<br>`;
+        document.querySelector('#cat').style.display = 'flex';
+        document.querySelector('#cat').innerHTML = `<img src="imgs/gato.png" alt="Gato">`
+      }
+    }
+
+    // Carrega todos os usuários (depois que o login é verificado)
+    async function carregarTodasInfoextra() {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        return;
+      }
+
+      try {
+        const res = await fetch('/todas-infoextra', {
+          method: 'GET',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          }
+        });
+
+        if (!res.ok) {
+          throw new Error('Acesso negado ou token inválido.');
+        }
+
+        const infoextra = await res.json();
+        console.log(infoextra)
+
+        if (infoextra.length === 0) {
+          document.getElementById('dadosUsuarios').innerText = 'Nenhum usuário encontrado.';
+          return;
+        }
+
+        let htmlContent = '<table><tr><th>ID</th><th>Usuario</th><th>Foto</th><th>Descrição</th><th>Xadrez</th><th>Damas</th><th>Jogo-da-velha</th><th>Sudoku</th><th>Campo-minado</th></tr>';
+
+        infoextra.forEach(usuario => {
+          htmlContent += `
+            <tr>
+              <td>${usuario.id}</td>
+              <td>${usuario.nome_usuario}</td>
+              <td><img src="${usuario.foto_perfil}" alt="Foto de ${usuario.nome_usuario}" width="40"></td>
+              <td>${usuario.descricao}</td>
+              <td>${usuario.pontuacao_xadrez}</td>
+              <td>${usuario.pontuacao_damas}</td>
+              <td>${usuario.pontuacao_tictactoe}</td>
+              <td>${usuario.pontuacao_sudoku}</td>
+              <td>${usuario.pontuacao_minado}</td>
+            </tr>
+          `;
+        });
+
+        htmlContent += '</table>';
+        document.getElementById('dadosUsuarios').innerHTML = htmlContent;
+
+      } catch (err) {
+        document.getElementById('dadosUsuarios').innerText = 'Erro: ' + err.message;
+      }
+    }
+
+    // Chama a função para verificar o estado de login e carregar os usuários
+ 
+  </script>
+</body>
+</html>

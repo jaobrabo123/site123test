@@ -26,7 +26,7 @@
             
             if (token) {
                 // Se estiver logado, exibir mensagem de boas-vindas
-                fetch('/usuarios', {
+                fetch('/infoextra', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -40,7 +40,7 @@
                 })
                 .then(data => {
                     console.log(data); // Verifique o retorno para confirmar
-                    document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
+                    document.querySelector('#pontuacao').textContent = `Pontuacao do ${data.nome_usuario}: ${data.pontuacao_sudoku}`;
                     document.querySelector('#loginMenuItem').style.display = 'none';
                     document.querySelector('#logoutMenuItem').style.display = 'block';
                 })
@@ -53,7 +53,7 @@
                 // Se não estiver logado, redirecionar para página de login
                 document.querySelector('#loginMenuItem').style.display = 'block';
                 document.querySelector('#logoutMenuItem').style.display = 'none';
-                document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar um conta!`;
+                document.querySelector('#pontuacao').innerHTML = `Faça <a href="./login.html">login</a> para exibir e registrar a sua pontuação!`;
             }
             document.getElementById('menuIcon')?.addEventListener('click', toggleSidebar);
             })
@@ -63,7 +63,7 @@
     <div id="main">
         <section id="home">
             <h1>Super Mini-Games</h1>
-            <p id="welcomeMessage"></p>
+            <p id="pontuacao"></p>
             <p></p>
         </section>
         <section id="content">

@@ -107,13 +107,16 @@ app.get('/infoextra', authenticateToken, async (req, res) => {
         });
 
         // Busca o usuário baseado no ID contido no token JWT
-        const usuario = await db.get('SELECT * FROM usuarios WHERE id = ?', [req.user.id]);
+        const infoextra = await db.get(`
+            SELECT info_extra.*, usuarios.nome AS nome_usuario
+            FROM info_extra
+            INNER JOIN usuarios ON info_extra.id_usua = usuarios.id
+            WHERE usuarios.id = ?
+        `, [req.user.id]);
 
-        if (!usuario) {
-            return res.status(404).json({ error: 'Usuário não encontrado' });
+        if (!infoextra) {
+            return res.status(404).json({ error: 'Informações extras não encontradas para este usuário' });
         }
-
-        const infoextra = await db.get('SELECT * FROM info_extra WHERE id = ?', [Number(usuario.id)]);
 
         res.json(infoextra);
     } catch (error) {
@@ -121,7 +124,25 @@ app.get('/infoextra', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/todas-infoextra', authenticateToken, async (req, res) => {
+    try {
+        const db = await open({
+            filename: './database.db',
+            driver: sqlite3.Database,
+        });
 
+        // Busca todos os usuários
+        const info_extras = await db.all('SELECT info_extra.*, usuarios.nome AS nome_usuario FROM info_extra INNER JOIN usuarios ON info_extra.id_usua = usuarios.id');
+
+        if (info_extras.length === 0) {
+            return res.status(404).json({ error: 'Nenhuma info-extra encontrada' });
+        }
+
+        res.json(info_extras);
+    } catch (error) {
+        res.status(500).send('Erro ao buscar info-extras: ' + error.message);
+    }
+});
 
 // Inicia o servidor
 app.listen(port, () => console.log(`Servidor rodando em http://localhost:${port}`));

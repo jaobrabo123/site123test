@@ -23,7 +23,6 @@
     flex-direction: column;
 }
 
-
 #fotoPerfil {
   width: 250px;
   height: 250px;
@@ -31,4 +30,15 @@
   object-fit: cover;
   cursor: pointer;
   transition: 0.3s;
+}
+
+#butoes{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    gap: 5px;
+}
+
+i{
+    cursor: pointer;
 }

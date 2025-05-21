@@ -128,4 +128,53 @@ function vitoria(winner){
     vez.innerHTML = `Vez do ${ganhador}`
     resultado.innerHTML = `"${ganhador}" ganhou!`
     jogoAtivo = true
+    registrarPontuacao()
+}
+
+function registrarPontuacao() {
+    const atributo = 'pontuacao_tictactoe';
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        alert('Você precisa estar logado para cadastrar a pontuação.');
+        return;
+    }
+
+    // Decodificar o JWT para obter o idusua
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const idusua = payload.id;
+
+    // Buscar info_extra atual
+    fetch('/infoextra', {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Erro ao buscar info_extra');
+        return response.json();
+    })
+    .then(data => {
+        const valor = Number(data.pontuacao_tictactoe) + 1;
+
+        // Atualizar a pontuação no backend
+        return fetch('/infoextra', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ atributo, valor, idusua }),
+        })
+        .then(response => {
+            if (!response.ok) throw new Error("Erro ao enviar pontuação");
+            return response.text();
+        })
+        .then(() => {
+            document.querySelector('#pontuacao').textContent = `Pontuação do ${data.nome_usuario}: ${valor}`;
+        });
+    })
+    .catch(err => {
+        alert('Erro ao registrar pontuação: ' + err.message);
+    });
 }
