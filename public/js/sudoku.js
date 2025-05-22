@@ -53,6 +53,10 @@ function gerarTabuleiro() {
             vidas=1
         }
     }
+    const labels = document.querySelectorAll(".labelRadio")
+    labels.forEach(element => {
+        element.style.display = 'flex'
+    });
     const cronometro = document.querySelector("#cronometro")
     const textin = document.querySelector("#textin")
     const tabuleiro = document.querySelector("#tabuleiro")
@@ -79,6 +83,7 @@ function gerarTabuleiro() {
     }
     botao.innerHTML = `Desistir`
     gerarNumeros()
+    esconderResolvidos()
     clearInterval(intervalo)
     cronometru()
 }
@@ -87,15 +92,16 @@ function tentativa(casa){
     if (jogoativo == false){
         return
     }
+    if (casa.innerHTML != ''){
+        return
+    }
     var skibi = document.querySelector('input[name="numSelec"]:checked')
     if (!skibi){
         alert("Selecione uma opção!")
         return
     }
 
-    if (casa.innerHTML != ''){
-        return
-    }
+    
     const textin = document.querySelector("#textin")
     const botao = document.querySelector("#button")
     const skibiNum = skibi.value
@@ -107,6 +113,7 @@ function tentativa(casa){
     if (nums[skibidi] == skibiNum){
         casinha.style.background = "wheat"
         casinha.innerHTML = `${skibiNum}`
+        esconderResolvidos()
         const casinhas = document.querySelectorAll(".casas")
         const ganhouSera = Array.from(casinhas).every(guis => guis.innerHTML !== '')
         if (ganhouSera){
@@ -267,6 +274,24 @@ function verificaOpcao(select) {
 function personalizado() {
     const personalizadu = document.querySelector("#personalizado")
     personalizadu.style.display = "flex"
+}
+
+function esconderResolvidos() {
+    const casas = document.querySelectorAll(".casas")
+    var casasID = Array.from(casas, (gugu) => gugu.id)
+    
+    
+    for (let i = 1; i <= 9; i++) {
+        const inputRadio = document.querySelector(`#radio${i}`)
+        
+        const casinhas = casasID.filter(guis=> Number(document.querySelector(`#${guis}`).innerHTML) === i)
+        if (casinhas.length === 9){
+            document.querySelector(`label[for="radio${i}"]`).style.display = 'none'
+            if (inputRadio.checked) {
+                inputRadio.checked = false
+            }
+        }
+    }
 }
 
 function registrarPontuacao(vidas) {

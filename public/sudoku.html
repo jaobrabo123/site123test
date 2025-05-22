@@ -40,7 +40,7 @@
                 })
                 .then(data => {
                     console.log(data); // Verifique o retorno para confirmar
-                    document.querySelector('#pontuacao').textContent = `Pontuacao do ${data.nome_usuario}: ${data.pontuacao_sudoku}`;
+                    document.querySelector('#pontuacao').textContent = `Pontuação do ${data.nome_usuario}: ${data.pontuacao_sudoku}`;
                     document.querySelector('#loginMenuItem').style.display = 'none';
                     document.querySelector('#logoutMenuItem').style.display = 'block';
                 })
@@ -95,31 +95,31 @@
             </div>
             <div id="opcao" style="display: none;">
                 <input type="radio" id="radio1" class="radio" name="numSelec" value="1" onchange="destacar(this)">
-                <label for="radio1">1</label>
+                <label for="radio1" class="labelRadio">1</label>
 
                 <input type="radio" id="radio2" class="radio" name="numSelec" value="2" onchange="destacar(this)">
-                <label for="radio2">2</label>
+                <label for="radio2" class="labelRadio">2</label>
 
                 <input type="radio" id="radio3" class="radio" name="numSelec" value="3" onchange="destacar(this)">
-                <label for="radio3">3</label>
+                <label for="radio3" class="labelRadio">3</label>
 
                 <input type="radio" id="radio4" class="radio" name="numSelec" value="4" onchange="destacar(this)">
-                <label for="radio4">4</label>
+                <label for="radio4" class="labelRadio">4</label>
 
                 <input type="radio" id="radio5" class="radio" name="numSelec" value="5" onchange="destacar(this)">
-                <label for="radio5">5</label>
+                <label for="radio5" class="labelRadio">5</label>
 
                 <input type="radio" id="radio6" class="radio" name="numSelec" value="6" onchange="destacar(this)">
-                <label for="radio6">6</label>
+                <label for="radio6" class="labelRadio">6</label>
 
                 <input type="radio" id="radio7" class="radio" name="numSelec" value="7" onchange="destacar(this)">
-                <label for="radio7">7</label>
+                <label for="radio7" class="labelRadio">7</label>
 
                 <input type="radio" id="radio8" class="radio" name="numSelec" value="8" onchange="destacar(this)">
-                <label for="radio8">8</label>
+                <label for="radio8" class="labelRadio">8</label>
 
                 <input type="radio" id="radio9" class="radio" name="numSelec" value="9" onchange="destacar(this)">
-                <label for="radio9">9</label>
+                <label for="radio9" class="labelRadio">9</label>
             </div>
         </div>
         </section>
