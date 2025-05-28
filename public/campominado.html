@@ -6,10 +6,12 @@
     <!--https://fontawesome.com/search?q=email&o=r-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/campominado.css">
     <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <script src="js/campominado.js" defer></script>
     <script src="js/script.js" defer></script>
     <script src="js/index.js" defer></script>
-    <title>Campo Minado</title>
+    <title>Super Mini-Games</title>
     
 </head>
 <body>
@@ -19,19 +21,75 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
+
+                const token = localStorage.getItem('token');
+            
+            if (token) {
+                // Se estiver logado, exibir mensagem de boas-vindas
+                fetch('/infoextra', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json(); // Backend retorna um único usuário
+                    } else {
+                        throw new Error('Usuário não autenticado');
+                    }
+                })
+                .then(data => {
+                    console.log(data); // Verifique o retorno para confirmar
+                    document.querySelector('#pontuacao').textContent = `Pontuação do ${data.nome_usuario}: ${data.pontuacao_minado}`;
+                    document.querySelector('#loginMenuItem').style.display = 'none';
+                    document.querySelector('#logoutMenuItem').style.display = 'block';
+                })
+                .catch(() => {
+                    alert('Sua sessão expirou. Faça login novamente.');
+                    localStorage.removeItem('token');
+                    window.location.href = './login.html';
+                });
+            } else {
+                // Se não estiver logado, redirecionar para página de login
+                document.querySelector('#loginMenuItem').style.display = 'block';
+                document.querySelector('#logoutMenuItem').style.display = 'none';
+                document.querySelector('#pontuacao').innerHTML = `Faça <a href="./login.html">login</a> para exibir e registrar a sua pontuação!`;
+            }
+            document.getElementById('menuIcon')?.addEventListener('click', toggleSidebar);
             })
             .catch(error => console.error('Erro ao carregar o header:', error));
+            
     </script>
     <div id="main">
         <section id="home">
             <h1>Campo Minado</h1>
-            <p id="welcomeMessage"></p>
+            <p id="pontuacao"></p>
             <p></p>
         </section>
         <section id="content">
-            <div id="tempbuilder" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 10px;">
-                <img src="imgs/construtor-clash-of-clans-builder.png" alt="Builder" style="height: 500px; width: auto; ">
-                <p style="color: red; margin-top: 10px; font-size: 1.5em;">EM DESENVOLVIMENTO</p>
+            <div class="painel-superior">
+                <label for="dificuldade">Dificuldade:</label>
+                <select name="dificuldade" id="dificuldade" onchange="verificaOpcao(this)">
+                    <option value="1">Fácil</option>
+                    <option value="2" selected>Médio</option>
+                    <option value="3">Difícil</option>
+                </select>
+            </div>
+            <button onclick="reset()" id="button">Resetar</button>
+            <div class="status">
+                <p id="contador">Bombas: 40</p>
+                <p id="cronometro">Tempo: 00:00</p>
+            </div>
+            <div id="areaCampo">
+                <div id="campo">
+
+                </div>
+            </div>
+            <div id="radioCell">
+                <input type="radio" name="bombBand" id="Cavar" class="radio" value="1" checked>
+                <label for="Cavar" class="labelRadio"><i class="fa-solid fa-magnifying-glass"></i></label>
+                <input type="radio" name="bombBand" id="Banderais" class="radio" value="2">
+                <label for="Banderais" class="labelRadio">🚩</label>
             </div>
         </section>
     </div>
@@ -51,46 +109,6 @@
     <p><a href="#home">Voltar ao topo ↑</a></p>
     </footer>
 
-    <script>
-        // Verificar se o usuário está logado
-        document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('token');
-            
-            if (token) {
-                // Se estiver logado, exibir mensagem de boas-vindas
-                fetch('/usuarios', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json(); // Backend retorna um único usuário
-                    } else {
-                        throw new Error('Usuário não autenticado');
-                    }
-                })
-                .then(data => {
-                    console.log(data); // Verifique o retorno para confirmar
-                    document.querySelector('#welcomeMessage').textContent = `Bem-vindo, ${data.nome}!`;
-                    document.querySelector('#loginMenuItem').style.display = 'none';
-                    document.querySelector('#logoutMenuItem').style.display = 'block';
-                })
-                .catch(() => {
-                    alert('Sua sessão expirou. Faça login novamente.');
-                    localStorage.removeItem('token');
-                    window.location.href = './login.html';
-                });
-            } else {
-                // Se não estiver logado, redirecionar para página de login
-                document.querySelector('#loginMenuItem').style.display = 'block';
-                document.querySelector('#logoutMenuItem').style.display = 'none';
-                document.querySelector('#welcomeMessage').innerHTML = `Você está desconectado! Clique <a href="./login.html">aqui</a> para Logar ou Cadastrar um conta!`;
-            }
-        });
-
-        // Função para logout
-        
-    </script>
+    
 </body>
 </html>

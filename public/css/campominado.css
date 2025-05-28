@@ -1,0 +1,64 @@
+#main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#areaCampo{
+    margin-bottom: 5px;
+}
+
+#campo{
+    display: grid;
+    border: 3px solid black;
+    width: min-content;
+    height: min-content;
+}
+
+.casas {
+    background-color: lightgray;
+    font-size: 20px; /* Ajuste o tamanho conforme necessário */
+    line-height: 30px; /* Centraliza verticalmente na célula */
+    display: block;
+    text-align: center;
+    color: red; /* Altere a cor, se necessário */
+    cursor: pointer;
+    border: 1px solid black; /* Adiciona bordas finas para cada célula */
+    user-select: none;
+}
+
+.casas #bombinha{
+    color: black !important;
+}
+
+.casas:hover{
+    background-color: rgb(168, 168, 168);
+}
+
+.radio{
+    appearance: none;
+}
+
+.labelRadio{
+    cursor: pointer;
+    padding: 3px;
+}
+
+.radio:checked + label{
+    background-color: rgb(21, 126, 0);
+}
+
+#radioCell{
+    margin-bottom: 10px;
+}
